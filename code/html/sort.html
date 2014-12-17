@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh_cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+	<title>分类</title>
+	<link rel="stylesheet" type="text/css" href="../css/base.css">
+	<style type="text/css">
+		.fenlei-list{
+			overflow: hidden;
+			text-align: center;
+		}
+		.fenlei-list li{
+			float: left;
+			width: 33.33%;
+			margin-top: 20px;
+		}
+		.fenlei-list img{
+			height: 64px;
+			width: 64px;
+		}
+		
+		
+		
+
+	</style>
+</head>
+<body>
+	<header>
+		<span class='f17'>校园直达</span> 
+		<span class='local'></span>
+		<div class='fl place'>
+			<span class='f14'>地点</span>
+			<span class='down-arrow'></span>
+		</div>
+	</header>
+	<section class='page'>
+		
+		<ul class='fenlei-list'>
+			<li>
+				<figure>
+					<img src="../images/canyin.png" alt="">
+					<p>餐饮</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/dianying.png" alt="">
+					<p>电影</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/jiudian.png" alt="">
+					<p>酒店</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/kuaidi.png" alt="">
+					<p>快递</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/lvyou.png" alt="">
+					<p>旅游</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/xiuxian.png" alt="">
+					<p>休闲</p>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<img src="../images/qita.png" alt="">
+					<p>其他</p>
+				</figure>
+			</li>
+		</ul>
+	</section>
+	<div class="layer"></div>
+	<ul class="local-list-btn">
+		<li><a href="javascript:;" class='select'>北京</a></li>
+		<li><a href="javascript:;">上海</a></li>
+		<li><a href="javascript:;">天津</a></li>
+		<li><a href="javascript:;">广州</a></li>
+		<li><a href="javascript:;">深圳</a></li>
+		<li><a href="javascript:;">杭州</a></li>
+		<li><a href="javascript:;">重庆</a></li>
+		<li><a href="javascript:;">成都</a></li>
+	</ul>
+	<footer>
+		<ul>
+			<li>
+				<a href="./frontPage.html">
+					<figure>
+						<img src="../images/bottom-jingpintuijian.png" alt="">
+						<figcaption>精品推荐</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li>
+				<a href="./rank.html">
+					<figure>
+						<img src="../images/bottom-paihangbang.png" alt="">
+						<figcaption>排行榜</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li class='select'>
+				<a href="./sort.html">
+					<figure>
+						<img src="../images/bottom-fenlei.png" alt="">
+						<figcaption>分类</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li>
+				<a href="./soso.html">
+					<figure>
+						<img src="../images/bottom-sosuo.png" alt="">
+						<figcaption>搜索</figcaption>
+					</figure>
+				</a>
+			</li>
+		</ul>
+	</footer>
+	<script type="text/javascript" src='../js/zepto-1.1.4.min.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			//选择地点
+			$('.place').bind('click', function(){
+				$('body').toggleClass('show-place');
+			});
+
+			$('.local-list-btn').bind('click', function(e){
+				if(e.target.nodeName.toLowerCase() !== 'a') return ;
+
+				$('a.select', this).removeClass('select');
+
+				$('.place span').eq(0).text($(e.target).addClass('select').text());
+
+				$('body').removeClass('show-place');
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh_cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="../css/base.css">
+	<style type="text/css">
+		
+		
+	</style>
+</head>
+<body>
+	<header>
+		<span class='f17'>校园直达</span> 
+		<span class='local'></span>
+		<div class='fl place'>
+			<span class='f14'>地点</span>
+			<span class='down-arrow'></span>
+		</div>
+	</header>
+	<section class='page'>
+		<div>
+			<table class='front-ad'>
+				<tr>
+					<td><div style='background:red'></div></td>
+					<td><div style='background:blue'></div></td>
+				</tr>
+				<tr>
+					<td><div style='background:green'></div></td>
+					<td><div style='background:yellow'></div></td>
+				</tr>
+			</table>
+		</div>
+		<ul class='list'>
+			<li>
+				<img src="../images/canyin.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+			<li>
+				<img src="../images/dianying.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学南京大学南京大学南京大学南京大学南京大学南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+			<li>
+				<img src="../images/canyin.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+			<li>
+				<img src="../images/kuaidi.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+			<li>
+				<img src="../images/jiudian.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+			<li>
+				<img src="../images/canyin.png" class='fl business-logo'>
+				<div>
+					<p >摄影与录像</p>
+					<p >南京大学</p>
+					<p >快递代收代发</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<div class="layer"></div>
+	<ul class="local-list-btn">
+		<li><a href="javascript:;" class='select'>北京</a></li>
+		<li><a href="javascript:;">上海</a></li>
+		<li><a href="javascript:;">天津</a></li>
+		<li><a href="javascript:;">广州</a></li>
+		<li><a href="javascript:;">深圳</a></li>
+		<li><a href="javascript:;">杭州</a></li>
+		<li><a href="javascript:;">重庆</a></li>
+		<li><a href="javascript:;">成都</a></li>
+	</ul>
+	<footer>
+		<ul>
+			<li  class='select'>
+				<a href="./frontPage.html">
+					<figure>
+						<img src="../images/bottom-jingpintuijian.png" alt="">
+						<figcaption>精品推荐</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li>
+				<a href="./rank.html">
+					<figure>
+						<img src="../images/bottom-paihangbang.png" alt="">
+						<figcaption>排行榜</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li>
+				<a href="./sort.html">
+					<figure>
+						<img src="../images/bottom-fenlei.png" alt="">
+						<figcaption>分类</figcaption>
+					</figure>
+				</a>
+			</li>
+			<li>
+				<a href="./soso.html">
+					<figure>
+						<img src="../images/bottom-sosuo.png" alt="">
+						<figcaption>搜索</figcaption>
+					</figure>
+				</a>
+			</li>
+		</ul>
+	</footer>
+	<script type="text/javascript" src='../js/zepto-1.1.4.min.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			//选择地点
+			$('.place').bind('click', function(){
+				$('body').toggleClass('show-place');
+			});
+
+			$('.local-list-btn').bind('click', function(e){
+				if(e.target.nodeName.toLowerCase() !== 'a') return ;
+
+				$('a.select', this).removeClass('select');
+
+				$('.place span').eq(0).text($(e.target).addClass('select').text());
+
+				$('body').removeClass('show-place');
+			});
+		});
+	</script>
+</body>
+</html>

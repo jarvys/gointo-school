@@ -1,0 +1,243 @@
+html,body,div,ul,li,section,a,em,input,select,p,span,label,form,textarea,nav,header,article,aside,figure,figcaption,footer{
+	-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-outline: none;
+       -moz-outline: none;
+            outline: none;
+
+    -webkit-focus-ring-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: 'MicroSoft yahei', '微软雅黑', Verdana, Arial, '宋体';
+}
+nav,header,article,aside,figure,figcaption,footer{
+	display: block;
+	margin: 0;
+	width: 100%;
+	padding: 0;
+}
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	position: relative;
+}
+body{
+	padding: 50px 0;
+}
+header{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: #0082dd;
+	height: 50px;
+	padding: 0 15px;
+	color: #fff;
+	line-height: 50px; 
+}
+footer{
+	background: #48a1dc;
+	height: 50px;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	color: #fff;
+	font-size: 12px;
+	line-height: 1;
+}
+header .local{
+	margin-top: 10px;
+}
+header .down-arrow{
+	margin-top: 15px;
+}
+header span{
+	float: left;
+}
+.page{
+	position: relative;
+	height: 100%;
+	overflow: auto;
+
+}
+.local{
+	height: 30px;
+	width: 30px;
+	vertical-align: baseline;
+	display: inline-block;
+	background: url(../images/top-dizhi.png);
+	background-size: cover;
+}
+
+
+.down-arrow{
+	height: 25px;
+	width: 25px;
+	vertical-align: baseline;
+	display: inline-block;
+	background: url(../images/top-dizhixuanze.png);
+	background-size: cover;
+}
+p{
+	margin: 8px 0;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+table{
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+.fl{
+	float: left;
+}
+.f18{
+	font-size: 18px;
+}
+.f17{
+	font-size: 17px;
+}
+.f16{
+	font-size: 16px;
+}
+.f15{
+	font-size: 15px;
+}
+.f14{
+	font-size: 14px;
+}
+
+
+.list{
+	padding: 0 15px;
+}
+.list li{
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0;
+}
+.list li:last-child{
+	border-bottom: none;
+}
+.business-logo{
+	height: 64px;
+	width: 64px;
+	background: transparent;
+	margin-right: 10px;
+}
+.clip, .list p{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+
+}
+.list p{
+	margin: 2px 0;
+}
+.list p:first-child{
+	font-size: 13px;
+	color: #727272;
+}
+.list p:last-child{
+	font-size: 14px;
+	color: #727272;
+}
+.list p:nth-child(2){
+	font-size: 16px;
+	color: #070707;
+}
+.list li > div{
+	overflow: hidden;
+}
+.front-ad{
+	text-align: center;
+}
+.front-ad td{
+	width: 50%;
+	padding: 5px 0;
+	vertical-align: middle;
+}
+.front-ad div{
+	height: 97px;
+	width: 150px;
+	margin: auto;
+}
+.layer{
+	display: none;
+	background: rgba(0,0,0,0.3);
+	position: absolute;
+	top: 50px;
+	left: 0;
+	bottom: 50px;
+	width: 100%;
+	z-index: 10;
+}
+.local-list-btn{
+	overflow: hidden;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	padding: 0px 15px;
+	background: #f7f7f7;
+	z-index: 20;
+	height: 0px;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.local-list-btn li{
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	padding: 8px 0;
+}
+.local-list-btn li a{
+	display: inline-block;
+	width: 87px;
+	height: 38px;
+	text-align: center;
+	border: 1px solid #e6e6e6;
+	color: #929292;
+	line-height: 36px;
+	background: #fafafa;
+}
+.local-list-btn li a.select{
+	border: 1px solid #ccc;
+	color: #0083db;
+	background: #f2f2f2;
+}
+.show-place .layer{
+	display: block;
+}
+.show-place .local-list-btn{
+	height: 182px;
+	padding: 10px 15px;
+}
+footer ul li{
+	float: left;
+	width: 25%;
+	text-align: center;
+	height: 50px;
+}
+footer ul li img{
+	height: 31px;
+	width: 31px;
+	display: block;
+	margin: auto;
+
+}
+footer ul li.select{
+	background: #0082dd;
+}
+footer ul li a{
+	display: block;
+	color: inherit;
+}
