@@ -164,10 +164,11 @@ table{
 	padding: 5px 0;
 	vertical-align: middle;
 }
-.front-ad div{
+.front-ad div, .front-ad img{
 	height: 97px;
 	width: 150px;
 	margin: auto;
+	display: block;
 }
 .layer{
 	display: none;

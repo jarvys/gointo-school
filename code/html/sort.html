@@ -37,60 +37,11 @@
 	<section class='page'>
 		
 		<ul class='fenlei-list'>
-			<li>
-				<figure>
-					<img src="../images/canyin.png" alt="">
-					<p>餐饮</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/dianying.png" alt="">
-					<p>电影</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/jiudian.png" alt="">
-					<p>酒店</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/kuaidi.png" alt="">
-					<p>快递</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/lvyou.png" alt="">
-					<p>旅游</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/xiuxian.png" alt="">
-					<p>休闲</p>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<img src="../images/qita.png" alt="">
-					<p>其他</p>
-				</figure>
-			</li>
+			
 		</ul>
 	</section>
-	<div class="layer"></div>
 	<ul class="local-list-btn">
-		<li><a href="javascript:;" class='select'>北京</a></li>
-		<li><a href="javascript:;">上海</a></li>
-		<li><a href="javascript:;">天津</a></li>
-		<li><a href="javascript:;">广州</a></li>
-		<li><a href="javascript:;">深圳</a></li>
-		<li><a href="javascript:;">杭州</a></li>
-		<li><a href="javascript:;">重庆</a></li>
-		<li><a href="javascript:;">成都</a></li>
+		
 	</ul>
 	<footer>
 		<ul>
@@ -128,22 +79,43 @@
 			</li>
 		</ul>
 	</footer>
+	<script type="template" id='listItemTpl'>
+		<li>
+			<a href='$link'>
+				<figure>
+					<img src="$thumbnail">
+					<p>$category</p>
+				</figure>
+			</a>
+		</li>
+	</script>
 	<script type="text/javascript" src='../js/zepto-1.1.4.min.js'></script>
 	<script type="text/javascript">
 		$(function(){
-			//选择地点
-			$('.place').bind('click', function(){
-				$('body').toggleClass('show-place');
-			});
+			var listItemTpl = $('#listItemTpl').html();
 
-			$('.local-list-btn').bind('click', function(e){
-				if(e.target.nodeName.toLowerCase() !== 'a') return ;
+			app.init('.fenlei-list', listItemTpl, 'category', {
+				success: function(app, o){
+					// this === ajax; o === resData
+					var h = '';
+					if( $.isArray(o) && o.length > 0){
+						$.each(o, function(i, n){
+							h += app.listItemTpl
+							.replace(/\$link/, n.link)
+							.replace(/\$thumbnail/, n.thumbnail)
+							.replace(/\$category/, n.category);
+						});
+						
+					}
 
-				$('a.select', this).removeClass('select');
+					if( !h && $('li', app.scrollElement).length == 0 ){
+						h = '<li>稍等，小编正在切图...</li>';
+					}else{
+						app.queryParam.pageid += app.queryParam.pagenum;
+					}
 
-				$('.place span').eq(0).text($(e.target).addClass('select').text());
-
-				$('body').removeClass('show-place');
+					$(app.scrollElement).append(h);
+				},
 			});
 		});
 	</script>
