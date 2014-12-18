@@ -21,7 +21,7 @@
             timeout: opt.timeout || 60000,
             async: opt.async === undefined ? true : opt.async === true,
             beforeSend: function(b) {
-                $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, b),
+                $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, b)
                 
             },
             success: function(b) {
