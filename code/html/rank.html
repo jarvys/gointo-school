@@ -103,7 +103,7 @@
 					if( $.isArray(o) && o.length > 0){
 						$.each(o, function(i, n){
 							h += app.listItemTpl
-							.replace(/\$index/, i)
+							.replace(/\$index/, $('.list li').length+i+1)
 							.replace(/\$link/, n.link)
 							.replace(/\$thumbnail/, n.thumbnail)
 							.replace(/\$name/, n.name)
@@ -114,9 +114,9 @@
 					}
 
 					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li>稍等，小编正在切图...</li>';
+						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
 					}else{
-						app.queryParam.pageid += app.queryParam.pagenum;
+						app.queryParam.pageid +=1;
 					}
 
 					$(app.scrollElement).append(h);

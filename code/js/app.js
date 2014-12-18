@@ -1,14 +1,14 @@
-;(function($){
+﻿;(function($){
     var URL = 'http://180.76.147.203:8080/getapps';
 
     if(typeof $ === 'undefined'){
         throw new Error('$ is undefined');
-        return;
+        return ;
     }
 
     $.request = function(opt){
         
-        //if (!opt || !opt.url) return;
+        // if (!opt || !opt.url) return;
 
         var loader = opt.loader === undefined ? true : opt.loader === true;
             
@@ -21,20 +21,23 @@
             timeout: opt.timeout || 60000,
             async: opt.async === undefined ? true : opt.async === true,
             beforeSend: function(b) {
-                $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, b);
+                $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, b)
+                
             },
             success: function(b) {
                 $.isFunction(opt.success) && opt.success.call(this, b);
             },
             error: function(b, c, d) {
-                $.isFunction(opt.error) && opt.error.call(this, b, c, d);
+                
+                $.isFunction(opt.error) && opt.error.call(this, b, c, d)
             },
             complete: function() {
-                $.isFunction(opt.complete) && opt.complete.call(this);
+                
+                $.isFunction(opt.complete) && opt.complete.call(this)
             }
         });
 
-    };
+    }
 
 })($);
 
@@ -42,7 +45,7 @@
 $(function(){
 
     window.app = {
-        scrollELement: null,
+        scrollElement: null,
         listItemTpl: '',
         queryParam: {
             pageid: 1,
@@ -52,7 +55,7 @@ $(function(){
         },
         init: function(se, tpl, type, opt){
             var fun = $.isFunction(fun) ? fun : function(){};
-            this.scrollELement = se;
+            this.scrollElement = se;
             this.listItemTpl = tpl;
             if(type == 'keyword'){
                 this.queryParam[type] = '';
@@ -117,7 +120,7 @@ $(function(){
                 p.latitude = $target.attr('latitude') || '';
                 p.longitude = $target.attr('longitude') || '';
 
-                $(self.scrollELement).html('');
+                $(self.scrollElement).html('')
 
                 self.setQueryParam(p);
 
@@ -140,40 +143,40 @@ $(function(){
         getListData: function(){
             var self = this;
             $.request({
-                data: this.queryParam,
+                data: self.queryParam,
                 beforeSend: function(b) {
-                    $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, self, b);
+                    $.isFunction(self.beforeSend) && self.beforeSend.call(this, self, b)
                 },
                 success: function(o){
                     $.isFunction(self.success) && self.success.call(this, self, o);
                 },
                 complete: function(){
                     self.loading = false;
-                    $.isFunction(opt.complete) && opt.complete.call(this, self);
+                    $.isFunction(self.complete) && self.complete.call(this, self)
                 }
             });
         },
         encode: function(str){
-            var s = "";
-            if (!str || str.length == 0) return "";
+            var s = "";   
+            if (!str || str.length == 0) return "";   
             s = str.replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/ /g, "&nbsp;")
                 .replace(/\'/g, "&#39;")
-                .replace(/\"/g, "&quot;");
+                .replace(/\"/g, "&quot;"); 
             return s;
         },
         decode: function(str){
-            var s = "";
-            if (!str || str.length == 0) return "";
+            var s = "";   
+            if (!str || str.length == 0) return "";   
             s = str.replace(/&amp;/g, "&")
                 .replace(/&lt;/g, "<")
                 .replace(/&gt;/g, ">")
                 .replace(/&nbsp;/g, " ")
                 .replace(/&#39;/g, "\'")
                 .replace(/&quot;/g, "\"")
-                .replace(/<br>/g, "\n");
+                .replace(/<br>/g, "\n");   
             return s;
         }
     }
