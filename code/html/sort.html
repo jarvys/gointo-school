@@ -169,10 +169,13 @@
 				var category = $.trim($('p',this).text());
 
 				$('.list').html('');
+
 				app.setQueryParam({pageid: 1,pagenum: 20, category: category});
 
 				if(!app.queryParam.latitude){
 					$('header .local').trigger('click');
+				}else{
+					app.getListData();
 				}
 				
 				$('.category-title').text(category);
