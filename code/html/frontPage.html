@@ -4,10 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
 	<title>首页</title>
-	<link rel="stylesheet" type="text/css" href="../css/base.css">
+	<link rel="stylesheet" type="text/css" href="../css/base.css?v=1">
 	<style type="text/css">
 		
-		
+		.front-ad a{
+			display: block;
+		}
 	</style>
 </head>
 <body>
@@ -36,6 +38,7 @@
 			
 		</ul>
 	</section>
+	<!-- <div style='height:50px;'></div> -->
 	<ul class="local-list-btn">
 		<!-- 城市列表 -->
 	</ul>
@@ -80,8 +83,8 @@
 			<a href='$link'>
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
-					<p >$name</p>
-					<p >$intro</p>
+					<p >$category</p>
+					<p >@$name-$intro</p>
 					<p >$alias</p>
 				</div>
 			</a>
@@ -91,9 +94,8 @@
 	<script type="text/javascript" src='../js/app.js'></script>
 	<script type="text/javascript">
 		$(function(){
-
 			var listItemTpl = $('#listItemTpl').html();
-				
+
 			// 请求海报
 			$.request({
 				url: 'http://180.76.147.203:8080/getapps?poster=1&pageid=1&pagenum=100&longitude=1&latitude=2',
@@ -116,6 +118,7 @@
 							h += app.listItemTpl
 							.replace(/\$link/, n.link)
 							.replace(/\$thumbnail/, n.thumbnail)
+							.replace(/\$category/, n.category)
 							.replace(/\$name/, n.name)
 							.replace(/\$intro/, n.intro)
 							.replace(/\$alias/, n.alias);

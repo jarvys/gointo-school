@@ -10,6 +10,12 @@
 			overflow: hidden;
 			text-align: center;
 		}
+		.show-category-list .list, .show-category-list .list-header{
+			display: block;
+		}
+		.show-category-list .fenlei-list, .show-category-list .ko{
+			display: none;
+		}
 		.fenlei-list li{
 			float: left;
 			width: 33.33%;
@@ -20,23 +26,54 @@
 			width: 64px;
 		}
 		
-		
-		
-
+		.list, .list-header{
+			display: none;
+		}
+		.list-header{
+			text-align: center;
+			height: 50px;
+		}
+		.category-operate{
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 2;
+		}
+		.category-title{
+			line-height: 50px;
+		}
+		.go-back{
+			width: 30px;
+			height: 50px;
+			text-align: center;
+		}
+		.go-back img{
+			height: 20px;
+			margin: 15px auto;
+		}
 	</style>
 </head>
 <body>
 	<header>
-		<span class='f17'>校园直达</span> 
-		<span class='local'></span>
-		<div class='fl place'>
-			<span class='f14'>地点</span>
-			<span class='down-arrow'></span>
+		<span class='f17 ko'>校园直达</span>
+		<div class='list-header'>
+			<div class='category-operate'>
+				<span class='f-l go-back'><img src="../images/back.png" alt=""></span>
+				<span class='local'></span>
+				<div class='fl place'>
+					<span class='f14'>地点</span>
+					<span class='down-arrow'></span>
+				</div>
+			</div>
+			<div class='f17 category-title'></div>
 		</div>
 	</header>
 	<section class='page'>
 		
 		<ul class='fenlei-list'>
+			
+		</ul>
+		<ul class='list'>
 			
 		</ul>
 	</section>
@@ -81,21 +118,73 @@
 	</footer>
 	<script type="template" id='listItemTpl'>
 		<li>
+			<figure>
+				<img src="$imgsrc">
+				<p>$name</p>
+			</figure>
+		</li>
+	</script>
+
+	<script type="template" id='anlistItemTpl'>
+		<li>
 			<a href='$link'>
-				<figure>
-					<img src="$thumbnail">
-					<p>$category</p>
-				</figure>
+				<img src="$thumbnail" class='fl business-logo'>
+				<div>
+					<p >$category</p>
+					<p >@$name-$intro</p>
+					<p >$alias</p>
+				</div>
 			</a>
 		</li>
 	</script>
+
 	<script type="text/javascript" src='../js/zepto-1.1.4.min.js'></script>
 	<script type="text/javascript" src='../js/app.js'></script>
 	<script type="text/javascript">
 		$(function(){
 			var listItemTpl = $('#listItemTpl').html();
 
-			app.init('.fenlei-list', listItemTpl, 'category', {
+			// 请求分类
+			$.request({
+				url: 'http://180.76.147.203:8080/categorylist',
+				success: function(o){
+					var h = '';
+					if( $.isArray(o) && o.length > 0){
+						$.each(o, function(i, n){
+							h += listItemTpl
+							.replace(/\$imgsrc/, n.imgsrc)
+							.replace(/\$name/, n.name);
+						});
+						
+					}
+
+					if( !h && $('li', '.fenlei-list').length == 0 ){
+						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
+					}
+					$('.fenlei-list').append(h);
+				}
+			});
+
+			$('.fenlei-list').delegate('figure','click', function(){
+				var category = $.trim($('p',this).text());
+
+				$('.list').html('');
+				app.setQueryParam({pageid: 1,pagenum: 20, category: category});
+
+				if(!app.queryParam.latitude){
+					$('header .local').trigger('click');
+				}
+				
+				$('.category-title').text(category);
+
+				$('body').addClass('show-category-list');
+			});
+
+			$('.go-back').bind('click', function(){
+				$('body').removeClass('show-category-list');
+			});
+
+			app.init('.list', $('#anlistItemTpl').html(), 'category', {
 				success: function(app, o){
 					// this === ajax; o === resData
 					var h = '';
@@ -104,7 +193,10 @@
 							h += app.listItemTpl
 							.replace(/\$link/, n.link)
 							.replace(/\$thumbnail/, n.thumbnail)
-							.replace(/\$category/, n.category);
+							.replace(/\$category/, n.category)
+							.replace(/\$name/, n.name)
+							.replace(/\$intro/, n.intro)
+							.replace(/\$alias/, n.alias);
 						});
 						
 					}

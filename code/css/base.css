@@ -23,10 +23,11 @@ html,body{
 	position: relative;
 }
 body{
-	padding: 50px 0;
+	padding: 50px 0 0;
+	/*border-bottom: 1px solid transparent;*/
 }
 header{
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	left: 0;
 	top: 0;
@@ -35,11 +36,12 @@ header{
 	padding: 0 15px;
 	color: #fff;
 	line-height: 50px; 
+	z-index: 10;
 }
 footer{
 	background: #48a1dc;
 	height: 50px;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	left: 0;
 	bottom: 0;
@@ -58,8 +60,9 @@ header span{
 }
 .page{
 	position: relative;
-	height: 100%;
-	overflow: auto;
+	padding-bottom: 100px;
+	/* height: 100%;
+	overflow: auto; */
 
 }
 .local{
@@ -153,6 +156,22 @@ table{
 	font-size: 16px;
 	color: #070707;
 }
+.list p:before{
+	display: inline-block;
+	color: inherit;
+	float: left;
+	width: 15px;
+}
+.list p:first-child:before{
+	content: '1.';
+}
+.list p:last-child:before{
+	content: '3.';
+}
+.list p:nth-child(2):before{
+	content: '2.';
+}
+
 .list li > div{
 	overflow: hidden;
 }
@@ -215,12 +234,17 @@ table{
 	color: #0083db;
 	background: #f2f2f2;
 }
+.show-place{
+	overflow: hidden;
+	height: 100%;
+}
 .show-place .layer{
 	display: block;
 }
 .show-place .local-list-btn{
 	height: 180px;
 	padding: 10px 15px;
+	overflow: auto;
 }
 footer ul li{
 	float: left;

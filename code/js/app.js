@@ -50,8 +50,8 @@ $(function(){
         queryParam: {
             pageid: 1,
             pagenum: 20,
-            latitude: "39.912454",
-            longitude: "116.404736"
+            latitude: "",
+            longitude: ""
         },
         init: function(se, tpl, type, opt){
             var fun = $.isFunction(fun) ? fun : function(){};
@@ -85,16 +85,98 @@ $(function(){
                             lis +='<li><a href="javascript:;" latitude="'+n.latitude+'" longitude="'+n.longitude+'">'+n.name+'</a></li>';
                         });
 
-                        $('body').append('<div class="layer"></div>');
+                        $('<div class="layer"></div>').appendTo('body').bind({
+                            'touchstart':function(e){
+                                e.stopPropagation();
+                            },
+                            'touchmove':function(e){
+                                e.stopPropagation();
+                            },
+                            'click':function(){
+                                $('.place').trigger('click');
+                            }
+                        });
 
-                        $('.local-list-btn').append(lis).find('a').eq(0)[0].click();
+                        $('.local-list-btn').append(lis)/*.find('a').eq(0)[0].click()*/;
+                        if($('.local').height() > 1){
+                            $('.local').trigger('click');
+                        }
                     }
                 }
             });
-
+            
+            
             //隐藏或者显示城市
             $('.place').bind('click', function(){
-                $('body').toggleClass('show-place');
+                $('html,body').toggleClass('show-place');
+            });
+            // 定位
+            $('.local').bind('click', function(){
+
+                if(navigator.geolocation){
+
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        
+                        positionCallBack(position);
+
+                    }, function(error){
+
+                        positionCallBack();
+                    });
+
+                }else{
+                    positionCallBack();
+                }
+
+                function positionCallBack(position){
+                    var p = {
+                        pageid: 1,
+                        pagenum: 20,
+                        latitude: "",
+                        longitude: ""
+                    };
+                    if(position&&position.coords){
+                        p.latitude = position.coords.latitude;
+                        p.longitude = position.coords.longitude;
+                    }else{
+                        p.latitude = '39.912454';
+                        p.longitude = '116.404736';
+                    }
+
+                    $(self.scrollElement).html('');
+
+                    self.setQueryParam(p);
+
+                    // 获取城市名称
+                    $.request({
+                        url: 'http://180.76.147.203:8080/geolocation?',
+                        data: {
+                            longitude: p.longitude,
+                            latitude: p.latitude
+                        },
+                        dataType: 'text/html',
+                        success: function(o){
+                            console.log(o);
+                            var locationName = $.trim(o);
+                            if (locationName&&locationName.lastIndexOf('市') == locationName.length -1 ) {
+                                locationName = locationName.slice(0, -1);
+                            };
+                            $('.place span').eq(0).text( locationName || '本地');
+
+                            $('.local-list-btn .select').removeClass('select');
+
+                            $('.local-list-btn a').each(function(i){
+                                if($(this).text() === locationName){
+                                    $(this).addClass('select');
+                                    return false;
+                                }
+                            });
+                        }
+                    });
+                    
+                    //触发请求
+                    self.getListData();
+                }
             });
 
             // 选择城市
@@ -115,7 +197,7 @@ $(function(){
 
                 $('.place span').eq(0).text($target.addClass('select').text());
 
-                $('body').removeClass('show-place');
+                $('html,body').removeClass('show-place');
 
                 p.latitude = $target.attr('latitude') || '';
                 p.longitude = $target.attr('longitude') || '';
@@ -126,6 +208,14 @@ $(function(){
 
                 //触发请求
                 self.getListData();
+
+            }).bind({
+                'touchstart':function(e){
+                    e.stopPropagation();
+                },
+                'touchmove':function(e){
+                    e.stopPropagation();
+                }
             });
 
             // 滑动加载

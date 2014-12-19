@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
 	<title>搜索</title>
-	<link rel="stylesheet" type="text/css" href="../css/base.css">
+	<link rel="stylesheet" type="text/css" href="../css/base.css?v=1.0">
 	<style type="text/css">
 		.search{
 			height: 55px;
@@ -101,8 +101,8 @@
 			<a href='$link'>
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
-					<p >$name</p>
-					<p >$intro</p>
+					<p >$category</p>
+					<p >@$name-$intro</p>
 					<p >$alias</p>
 				</div>
 			</a>
@@ -124,6 +124,7 @@
 							h += app.listItemTpl
 							.replace(/\$link/, n.link)
 							.replace(/\$thumbnail/, n.thumbnail)
+							.replace(/\$category/, n.category)
 							.replace(/\$name/, n.name)
 							.replace(/\$intro/, n.intro)
 							.replace(/\$alias/, n.alias);
