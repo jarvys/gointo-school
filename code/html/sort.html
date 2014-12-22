@@ -116,6 +116,13 @@
 			</li>
 		</ul>
 	</footer>
+
+	<div class="loading-layer">
+		<table>
+			<td><img src="../images/loading.gif" alt=""></td>
+		</table>
+	</div>
+	
 	<script type="template" id='listItemTpl'>
 		<li>
 			<figure>
@@ -131,8 +138,8 @@
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
 					<p >$category</p>
-					<p >@$name-$intro</p>
-					<p >$alias</p>
+					<p >@$name</p>
+					<p >$intro</p>
 				</div>
 			</a>
 		</li>
@@ -169,7 +176,6 @@
 				var category = $.trim($('p',this).text());
 
 				$('.list').html('');
-
 				app.setQueryParam({pageid: 1,pagenum: 20, category: category});
 
 				if(!app.queryParam.latitude){
@@ -185,6 +191,7 @@
 
 			$('.go-back').bind('click', function(){
 				$('body').removeClass('show-category-list');
+				$('html,body').removeClass('show-place');
 			});
 
 			app.init('.list', $('#anlistItemTpl').html(), 'category', {
@@ -205,7 +212,9 @@
 					}
 
 					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
+						h = '<li style="width:100%;text-align:center;color:#727272">'
+							+'<img src="../images/nodata.png" style="width:160px;">'
+							+'<div>童鞋，换个内容试试，嗖嗖嗖...</div></li>';
 					}else{
 						app.queryParam.pageid += 1;
 					}

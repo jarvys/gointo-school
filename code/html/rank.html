@@ -7,9 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/base.css?v=1.0">
 	<style type="text/css">
 		
-		.list{
-			list-style-type: number;
-		}
 		em{
 			float: left;
 			color: #a8a8a8;
@@ -84,8 +81,8 @@
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
 					<p >$category</p>
-					<p >@$name-$intro</p>
-					<p >$alias</p>
+					<p >@$name</p>
+					<p >$intro</p>
 				</div>
 			</a>
 		</li>
@@ -115,7 +112,9 @@
 					}
 
 					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
+						h = '<li style="width:100%;text-align:center;color:#727272">'
+							+'<img src="../images/nodata.png" style="width:160px;">'
+							+'<div>童鞋，换个内容试试，嗖嗖嗖...</div></li>';
 					}else{
 						app.queryParam.pageid +=1;
 					}

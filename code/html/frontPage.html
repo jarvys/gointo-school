@@ -32,6 +32,10 @@
 					<td></td>
 					<td></td>
 				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
 			</table>
 		</div>
 		<ul class='list'>
@@ -84,8 +88,8 @@
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
 					<p >$category</p>
-					<p >@$name-$intro</p>
-					<p >$alias</p>
+					<p >@$name</p>
+					<p >$intro</p>
 				</div>
 			</a>
 		</li>
@@ -97,17 +101,30 @@
 			var listItemTpl = $('#listItemTpl').html();
 
 			// 请求海报
-			$.request({
-				url: 'http://180.76.147.203:8080/getapps?poster=1&pageid=1&pagenum=100&longitude=1&latitude=2',
-				// data: {poster:1},
-				success: function(o){
-					if( $.isArray(o) && o.length > 0){
-						$('.front-ad td').each(function(i){
-							$('<a href='+o[i].link+'><img src='+o[i].poster+'></a>').appendTo(this);
-						});
+			
+			app.getPoster = function(){
+				var p = app.getLocalPosition() || {latitude: "39.912454", longitude: "116.404736"}; // 默认北京坐标
+
+				$.request({
+					url: 'http://180.76.147.203:8080/getapps?',
+					data: {
+						poster: 1,
+						pageid: 1,
+						pagenum: 6,
+						longitude: p.longitude,
+						latitude: p.latitude
+					},
+					success: function(o){
+						if( $.isArray(o) && o.length > 0){
+							$('.front-ad td').each(function(i){
+								$('<a href='+o[i].link+'><img src='+o[i].poster+'></a>').appendTo(this);
+							});
+						}
 					}
-				}
-			});
+				});
+			};
+
+			app.getPoster();
 
 			app.init('.list', listItemTpl, 'commend', {
 				success: function(app, o){
@@ -126,7 +143,9 @@
 					}
 
 					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
+						h = '<li style="width:100%;text-align:center;color:#727272">'
+							+'<img src="../images/nodata.png" style="width:160px;">'
+							+'<div>童鞋，换个内容试试，嗖嗖嗖...</div></li>';
 					}else{
 						app.queryParam.pageid += 1;
 					}

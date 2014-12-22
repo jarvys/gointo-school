@@ -21,9 +21,10 @@ html,body{
 	padding: 0;
 	height: 100%;
 	position: relative;
+	background: #fafafa;
 }
 body{
-	padding: 50px 0 0;
+	padding-top: 50px;
 	/*border-bottom: 1px solid transparent;*/
 }
 header{
@@ -60,10 +61,8 @@ header span{
 }
 .page{
 	position: relative;
-	padding-bottom: 100px;
-	/* height: 100%;
-	overflow: auto; */
-
+	background: #fafafa;
+	margin-bottom: 50px;
 }
 .local{
 	height: 30px;
@@ -82,6 +81,15 @@ header span{
 	display: inline-block;
 	background: url(../images/top-dizhixuanze.png);
 	background-size: cover;
+	-webkit-transition: transform 0.5s;
+	-moz-transition: transform 0.5s;
+	transition: transform 0.5s;
+
+}
+.rotate-arrow{
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	transform: rotate(-90deg);
 }
 p{
 	margin: 8px 0;
@@ -156,38 +164,32 @@ table{
 	font-size: 16px;
 	color: #070707;
 }
-.list p:before{
-	display: inline-block;
-	color: inherit;
-	float: left;
-	width: 15px;
-}
-.list p:first-child:before{
-	content: '1.';
-}
-.list p:last-child:before{
-	content: '3.';
-}
-.list p:nth-child(2):before{
-	content: '2.';
-}
+
 
 .list li > div{
 	overflow: hidden;
 }
 .front-ad{
-	text-align: center;
+	border-spacing: 5px;
+	border-collapse: separate;
 }
 .front-ad td{
 	width: 50%;
-	padding: 5px 0;
 	vertical-align: middle;
+	font-size: 0;
+}
+.front-ad td:first-child{
+	text-align: right;
+}
+.front-ad td:last-child{
+	text-align: left;
 }
 .front-ad div, .front-ad img{
 	height: 97px;
 	width: 150px;
 	margin: auto;
-	display: block;
+	display: inline-block;
+	border-radius: 5px;
 }
 .layer{
 	display: none;
@@ -265,4 +267,27 @@ footer ul li.select{
 footer ul li a{
 	display: block;
 	color: inherit;
+}
+
+.loading-layer{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 50px 0;
+	display: none;
+}
+.loading-layer table{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	background: rgba(0,0,0,0.2);
+}
+.loading-layer td{
+	vertical-align: middle;
+	font-size: 0;
+}
+.loading-layer img{
+	/*height: 45px;*/
 }

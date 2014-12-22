@@ -6,6 +6,7 @@
 	<title>搜索</title>
 	<link rel="stylesheet" type="text/css" href="../css/base.css?v=1.0">
 	<style type="text/css">
+
 		.search{
 			height: 55px;
 			padding: 10px 14px;
@@ -15,15 +16,24 @@
 		}
 		.search >div {
 			height: 100%;
+			border: 1px solid #ebebeb;
+			border-radius: 5px;
 		}
 		.search input{
 			width: 100%;
 			height: 100%;
-			border: 1px solid #ebebeb;
 			outline: none;
 			padding: 0 10px;
 			border-radius: 5px;
 			font-size: 15px;
+			border: none;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+			-webkit-outline: none;
+			-moz-outline: none;
+			outline: none;
+
 		}
 		.soso{
 			height: 30px;
@@ -102,8 +112,8 @@
 				<img src="$thumbnail" class='fl business-logo'>
 				<div>
 					<p >$category</p>
-					<p >@$name-$intro</p>
-					<p >$alias</p>
+					<p >@$name</p>
+					<p >$intro</p>
 				</div>
 			</a>
 		</li>
@@ -132,7 +142,9 @@
 					}
 
 					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li style="width:100%;text-align:center">稍等，小编正在切图...</li>';
+						h = '<li style="width:100%;text-align:center;color:#727272">'
+							+'<img src="../images/opps.png" style="width:160px;">'
+							+'<div>直达号还米有开到这里哦~~！</div></li>';
 					}else{
 						app.queryParam.pageid += 1;
 					}
@@ -142,11 +154,20 @@
 			});
 
 			$('.soso').bind('click', function(){
+				var keywords = $.trim($('#keywords').val());
+				if(!keywords) return;
+
 				app.queryParam.pageid = 1;
-				app.queryParam['keyword'] = $.trim($('#keywords').val());
+				app.queryParam['keyword'] = keywords;
 				$('.list').html('');
 				app.getListData();
 			});
+			if(navigator.userAgent.indexOf(/iPhone/i) !== -1){
+				$('#keywords').bind('blur', function(e){
+					$('.soso').trigger('click');
+				});
+			}
+			
 		});
 	</script>
 </body>
