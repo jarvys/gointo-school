@@ -64,6 +64,13 @@ header span{
 	background: #fafafa;
 	padding-bottom: 50px;
 }
+.page:after{
+	content: '';
+	height: 1px;
+	background: transparent;
+	width: 100%;
+	display: block;
+}
 .local{
 	height: 30px;
 	width: 30px;
@@ -87,9 +94,9 @@ header span{
 
 }
 .rotate-arrow{
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	transform: rotate(-90deg);
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	transform: rotate(-180deg);
 }
 p{
 	margin: 8px 0;

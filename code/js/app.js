@@ -24,7 +24,13 @@
                 $.isFunction(opt.beforeSend) && opt.beforeSend.call(this, b);
 
                 if(loader){
-
+                    if($('.loading-layer').length == 0){
+                        $('<div class="loading-layer">'
+                            +'<table>'
+                                +'<td><img src="../images/loading.gif" alt=""></td>'
+                            +'</table>'
+                        +'</div>').appendTo('body');
+                    }
                     $('.loading-layer').show();
                 }
             },
@@ -52,6 +58,7 @@ $(function(){
     window.app = {
         scrollElement: null,
         listItemTpl: '',
+        hasNextPage: true,
         queryParam: {
             pageid: 1,
             pagenum: 20,
@@ -95,6 +102,7 @@ $(function(){
 
         },
         setQueryParam: function(p){
+            this.hasNextPage = true;
 
             $.extend(this.queryParam, p);
         },
@@ -107,16 +115,21 @@ $(function(){
                         var p = {latitude:position.coords.latitude,longitude:position.coords.longitude};
 
                         self.setLocalPosition(p);
-
+                        // 避免北京的用户初次使用，定位的时候额外查询一次
+                        /*if(p.latitude == '39.912454' && p.longitude == '116.404736'){
+                           self.configCityName();
+                           return ; 
+                        }*/
                         //重新获取海报
                         if(typeof self.getPoster == 'function'){
                             self.getPoster();
                         }
-
+                        // 定位后重新查询
                         self.positionCallBack(self.getLocalPosition());
 
                     }, function(error){
-                        //alert('定位失败')
+                        // alert('定位失败')
+                        console.log('local failed');
                     });
                 }
 
@@ -127,7 +140,6 @@ $(function(){
             var self = this,
                 p = {
                     pageid: 1,
-                    pagenum: 20,
                     latitude: "",
                     longitude: ""
                 };
@@ -235,7 +247,6 @@ $(function(){
             $('.local-list-btn').bind('click', function(e){
                 var p = {
                     pageid: 1,
-                    pagenum: 20,
                     latitude: "",
                     longitude: ""
                 },
@@ -292,7 +303,9 @@ $(function(){
         getListData: function(){
             var self = this, loader;
 
-            if( this.queryParam.pageid ==1 && this.queryParam.category){
+            if(!this.hasNextPage) return;
+
+            if( this.queryParam.pageid ==1 ){
                 loader = true;
             }
 

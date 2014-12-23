@@ -141,12 +141,17 @@
 						});
 					}
 
-					if( !h && $('li', app.scrollElement).length == 0 ){
-						h = '<li style="width:100%;text-align:center;color:#727272">'
-							+'<img src="../images/opps.png" style="width:160px;">'
-							+'<div>直达号还米有开到这里哦~~！</div></li>';
+					if( !h ){
+						if( $('li', app.scrollElement).length == 0 )
+							h = '<li style="width:100%;text-align:center;color:#727272">'
+								+'<img src="../images/opps.png" style="width:160px;">'
+								+'<div>直达号还米有开到这里哦~~！</div></li>';
 					}else{
 						app.queryParam.pageid += 1;
+					}
+
+					if(o.length<app.queryParam.pagenum){
+						app.hasNextPage = false;
 					}
 
 					$(app.scrollElement).append(h);
@@ -160,6 +165,9 @@
 				app.queryParam.pageid = 1;
 				app.queryParam['keyword'] = keywords;
 				$('.list').html('');
+
+				app.hasNextPage = true;
+				
 				app.getListData();
 			});
 			if(navigator.userAgent.indexOf(/iPhone/i) !== -1){
