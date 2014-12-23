@@ -139,8 +139,14 @@ table{
 }
 .list li{
 	border-bottom: 1px solid #ccc;
-	padding: 10px 0;
+	padding: 10px 0px;
 }
+
+.list li a {
+	display: block;
+	overflow: hidden;
+}
+
 .list li:last-child{
 	border-bottom: none;
 }
@@ -164,11 +170,11 @@ table{
 	color: #727272;
 }
 .list p:last-child{
-	font-size: 14px;
+	font-size: 12px;
 	color: #727272;
 }
 .list p:nth-child(2){
-	font-size: 16px;
+	font-size: 14px;
 	color: #070707;
 }
 
@@ -192,8 +198,8 @@ table{
 	text-align: left;
 }
 .front-ad div, .front-ad img{
-	height: 97px;
-	width: 150px;
+	max-height: 100%;
+	max-width: 100%;
 	margin: auto;
 	display: inline-block;
 	border-radius: 5px;
