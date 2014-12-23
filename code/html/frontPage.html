@@ -104,7 +104,7 @@
 			
 			app.getPoster = function(){
 				var p = app.getLocalPosition() || {latitude: "39.912454", longitude: "116.404736"}; // 默认北京坐标
-
+				
 				$.request({
 					url: 'http://180.76.147.203:8080/getapps?',
 					data: {
@@ -116,7 +116,8 @@
 					},
 					success: function(o){
 						if( $.isArray(o) && o.length > 0){
-							$('.front-ad td').each(function(i){
+							$('.front-ad td').html('').each(function(i){
+								if(!o[i]) return false;
 								$('<a href='+o[i].link+'><img src='+o[i].poster+'></a>').appendTo(this);
 							});
 						}

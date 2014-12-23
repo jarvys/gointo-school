@@ -111,7 +111,7 @@ $(function(){
                         self.positionCallBack(self.getLocalPosition());
 
                     }, function(error){
-                        alert('定位失败')
+                        //alert('定位失败')
                     });
                 }
 
