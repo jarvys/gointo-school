@@ -121,9 +121,8 @@
 	<script type="text/javascript" src='../js/zepto-1.1.4.min.js'></script>
 	<script type="text/javascript" src='../js/app.js'></script>
 	<script type="text/javascript">
-		$(function(){
+		$(function() {
 			var listItemTpl = $('#listItemTpl').html();
-				
 
 			app.init('.list', listItemTpl, 'keyword', {
 				success: function(app, o){
@@ -170,12 +169,12 @@
 				
 				app.getListData();
 			});
+
 			if(navigator.userAgent.indexOf(/iPhone/i) !== -1){
 				$('#keywords').bind('blur', function(e){
 					$('.soso').trigger('click');
 				});
 			}
-			
 		});
 	</script>
 </body>

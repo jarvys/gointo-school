@@ -88,7 +88,6 @@ $(function() {
             // 加载列表数据
 
             if ($('.local').height() > 1) {
-
                 this.getListData();
             }
 
@@ -96,9 +95,7 @@ $(function() {
 
             // 定位
             this.locale();
-
             this.configCityName();
-
         },
         setQueryParam: function(p) {
             this.hasNextPage = true;
@@ -114,6 +111,7 @@ $(function() {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 };
+				alert(JSON.stringify(p, null, 4));
                 console.log('position:', p);
 
                 self.setLocalPosition(p);
@@ -347,7 +345,6 @@ $(function() {
             var value = JSON.stringify(obj);
             _setCookie('position', value, 30);
         }
-
     }
 
     function _encode(str) {
