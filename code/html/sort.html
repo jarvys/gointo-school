@@ -201,7 +201,7 @@
 					if( $.isArray(o) && o.length > 0){
 						$.each(o, function(i, n){
 							h += app.listItemTpl
-							.replace(/\$link/, n.link)
+							.replace(/\$link/, app.encodeAppLink(n._id, n.link))
 							.replace(/\$thumbnail/, n.thumbnail)
 							.replace(/\$category/, n.category)
 							.replace(/\$name/, n.name)

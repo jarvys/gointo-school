@@ -58,6 +58,11 @@ $(function(){
             latitude: "39.912454", // 默认北京坐标
             longitude: "116.404736"
         },
+
+		encodeAppLink: function(appid, link) {
+			return "http://180.76.147.203:8080/clicknum?appid=" + appid + "&url=" + encodeURIComponent(link);
+		},
+
         init: function(se, tpl, type, opt){
             var fun = $.isFunction(fun) ? fun : function(){};
             this.scrollElement = se;

@@ -62,7 +62,7 @@ header span{
 .page{
 	position: relative;
 	background: #fafafa;
-	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 .local{
 	height: 30px;
